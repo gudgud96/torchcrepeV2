@@ -29,4 +29,7 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    package_data={
+        'torchcrepeV2/assets': ['model-full-crepe.pt']
+    },
  )
