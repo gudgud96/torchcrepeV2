@@ -2,17 +2,20 @@ import torch
 import numpy as np
 from numpy.lib.stride_tricks import as_strided
 from .crepe_model import TorchCrepe
-from .utils import to_viterbi_cents
+from .utils import to_viterbi_cents, to_local_average_cents
 import os
 
 class TorchCrepePredictor:
-    def __init__(self):
+    def __init__(self, device="cuda"):
         self.model = TorchCrepe()
-        self.model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.realpath(__file__)), "./model-full-crepe.pt")))
+        self.model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.realpath(__file__)), "assets/model-full-crepe.pt")))
         self.model.eval()
 
-    def predict(self, audio, sr, model_capacity='large',
-                viterbi=False, center=True, step_size=10, verbose=1):
+        self.device = device
+        if self.device == "cuda":
+            self.model.cuda()
+
+    def predict(self, audio, sr=16000, viterbi=True, center=True, step_size=10):
         """
         Perform pitch estimation on given audio
 
@@ -53,8 +56,9 @@ class TorchCrepePredictor:
         """
         
         # make 1024-sample frames of the audio with hop length of 10 milliseconds
-        x = np.pad(audio, 512, mode='constant', constant_values=0)
-        hop_length = int(16000 * int(1000 * 160 / 16000) / 1000)
+        if center:
+            x = np.pad(audio, 512, mode='constant', constant_values=0)
+        hop_length = int(sr * step_size / 1000)     # step_size = int(1000 * 160 / 16000)
         n_frames = 1 + int((len(x) - 1024) / hop_length)
         frames = as_strided(x, shape=(1024, n_frames),
                             strides=(x.itemsize, hop_length * x.itemsize))
@@ -64,8 +68,17 @@ class TorchCrepePredictor:
         frames -= np.mean(frames, axis=1)[:, np.newaxis]
         frames /= np.std(frames, axis=1)[:, np.newaxis]
 
-        y = self.model(torch.tensor(frames))
-        cents = to_viterbi_cents(y.cpu().detach().numpy())
+        frames = torch.tensor(frames)
+        if self.device == "cuda":
+            frames = frames.cuda()
+        
+        y = self.model(frames)
+
+        if viterbi:
+            cents = to_viterbi_cents(y.cpu().detach().numpy())
+        else:
+            cents = to_local_average_cents(y.cpu().detach().numpy())
+        
         frequency = 10 * 2 ** (cents / 1200)
         frequency[np.isnan(frequency)] = 0
 

@@ -16,7 +16,7 @@ except:
     pass
 
 
-y, sr = librosa.load("../litmus/litmus/test_audio/kygo_pluck_3s.wav", sr=16000)
+y, sr = librosa.load("../../litmus/litmus/test_audio/kygo_pluck_3s.wav", sr=16000)
 torch_crepe = TorchCrepePredictor()
 f = torch_crepe.predict(y, sr)
 length = y.shape[0] // 100

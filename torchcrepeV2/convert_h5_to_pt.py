@@ -32,7 +32,7 @@ y = Dense(360, activation='sigmoid', name="classifier")(y)
 model = Model(inputs=x, outputs=y)
 
 package_dir = os.path.dirname(os.path.realpath(__file__))
-filename = "model-full.h5"
+filename = "assets/model-full.h5"
 model.load_weights(os.path.join(package_dir, filename))
 
 state_dict = {}
@@ -56,7 +56,7 @@ state_dict["classifier.weight"] = torch.tensor(model.get_layer("classifier").ker
 state_dict["classifier.bias"] = torch.tensor(model.get_layer("classifier").bias.numpy())
 
 
-torch.save(state_dict, 'model-full-crepe.pt')
+torch.save(state_dict, 'assets/model-full-crepe.pt')
 
     
 
