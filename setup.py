@@ -6,7 +6,7 @@ except ImportError:
     from urllib import urlretrieve
 
 base_url = 'https://github.com/gudgud96/torchcrepeV2/raw/master/torchcrepeV2/assets/model-full-crepe.pt'
-compressed_path = os.path.join('torchcrepeV2', 'assets', 'model-full-crepe.pt')
+compressed_path = os.path.join('torchcrepeV2', 'model-full-crepe.pt')
 print('Downloading weight file model-full-crepe.pt')
 urlretrieve(base_url, compressed_path)
 
@@ -30,6 +30,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     package_data={
-        'torchcrepeV2/assets': ['model-full-crepe.pt']
+        'torchcrepeV2': ['model-full-crepe.pt']
     },
  )
