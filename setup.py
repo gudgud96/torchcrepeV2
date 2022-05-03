@@ -1,4 +1,18 @@
 import setuptools
+import os
+try:
+    from urllib.request import urlretrieve
+except ImportError:
+    from urllib import urlretrieve
+
+base_url = 'https://github.com/gudgud96/torchcrepeV2/raw/master/torchcrepeV2/assets/model-full-crepe.pt'
+
+
+weight_path = os.path.join('crepe', weight_file)
+if not os.path.isfile(weight_path):
+    compressed_path = os.path.join('torchcrepeV2', 'assets', 'model-full-crepe.pt')
+    print('Downloading weight file model-full-crepe.pt')
+    urlretrieve(base_url, compressed_path)
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
