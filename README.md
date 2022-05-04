@@ -8,7 +8,7 @@ Similar project: https://github.com/maxrmorrison/torchcrepe
 
 ## Usage
 
-`pip install git+https://github.com/gudgud96/torchcrepeV2@latest`
+`pip install git+https://github.com/gudgud96/torchcrepeV2`
 
 ```python
 from torchcrepeV2 import TorchCrepePredictor
