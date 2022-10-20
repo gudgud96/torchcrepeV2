@@ -16,7 +16,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='torchcrepeV2',  
-    version='0.1',
+    version='0.1.2',
     author="Hao Hao Tan",
     author_email="helloharry66@gmail.com",
     description="crepe, SOTA pitch tracking tool in PyTorch",

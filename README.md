@@ -8,10 +8,11 @@ Similar project: https://github.com/maxrmorrison/torchcrepe
 
 ## Usage
 
-`pip install git+https://github.com/gudgud96/torchcrepeV2`
+`pip install torchcrepeV2`
 
 ```python
 from torchcrepeV2 import TorchCrepePredictor
+import librosa
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -19,7 +20,7 @@ y, sr = librosa.load("some_audio.wav", sr=16000)
 torch_crepe = TorchCrepePredictor(device="cuda")
 
 # all arguments are aligned with original crepe implementation
-f = torch_crepe.predict(y=y, 
+f = torch_crepe.predict(audio=y, 
                         sr=sr,
                         viterbi=True, 
                         center=True, 
