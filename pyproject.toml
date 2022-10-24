@@ -1,6 +1,6 @@
 [project]
 name = "torchcrepeV2"
-version = "0.1.2"
+version = "0.1.3"
 authors = [
   { name="Hao Hao Tan", email="helloharry66@gmail.com" },
 ]
