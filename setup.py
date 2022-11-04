@@ -5,9 +5,16 @@ try:
 except ImportError:
     from urllib import urlretrieve
 
+# download pytorch weight file
 base_url = 'https://github.com/gudgud96/torchcrepeV2/raw/master/torchcrepeV2/assets/model-full-crepe.pt'
 compressed_path = os.path.join('torchcrepeV2', 'model-full-crepe.pt')
 print('Downloading weight file model-full-crepe.pt')
+urlretrieve(base_url, compressed_path)
+
+# download onnx weight file
+base_url = 'https://github.com/gudgud96/torchcrepeV2/raw/master/torchcrepeV2/assets/crepe_model.onnx'
+compressed_path = os.path.join('torchcrepeV2', 'crepe_model.onnx')
+print('Downloading crepe_model.onnx')
 urlretrieve(base_url, compressed_path)
 
 with open("README.md", "r") as fh:
@@ -16,7 +23,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='torchcrepeV2',  
-    version='0.1.2',
+    version='0.1.4',
     author="Hao Hao Tan",
     author_email="helloharry66@gmail.com",
     description="crepe, SOTA pitch tracking tool in PyTorch",
@@ -30,6 +37,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     package_data={
-        'torchcrepeV2': ['model-full-crepe.pt']
+        'torchcrepeV2': ['model-full-crepe.pt', 'crepe_model.onnx']
     },
  )
