@@ -49,4 +49,4 @@ Tracked pitch nearly identical as compared to `crepe`.
 ![](sample_2.png)
 
 ## TODO
-- [ ] Optimize inference performance
+- [ ] Add unit tests
