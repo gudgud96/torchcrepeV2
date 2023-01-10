@@ -87,8 +87,8 @@ class TorchCrepePredictor:
         frequency = 10 * 2 ** (cents / 1200)
         frequency[np.isnan(frequency)] = 0
         
-        confidence = y.max(axis=1)
-        time = np.arange(confidence.shape[0]) * step_size / 1000.0
+        confidence = y.max(axis=1).values
+        time = np.arange(y.shape[0]) * step_size / 1000.0
 
         return time, frequency, confidence, y
 
