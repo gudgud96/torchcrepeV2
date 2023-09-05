@@ -1,1 +1,1 @@
-from .core import TorchCrepePredictor
+from .core import TorchCrepePredictor, ONNXTorchCrepePredictor
