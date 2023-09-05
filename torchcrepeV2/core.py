@@ -92,7 +92,12 @@ class TorchCrepePredictor:
 
 class ONNXTorchCrepePredictor:
     def __init__(self):
-        self.ort_session = onnxruntime.InferenceSession(os.path.join(os.path.dirname(os.path.realpath(__file__)), "crepe_model.onnx"))
+        self.ort_session = onnxruntime.InferenceSession(
+            os.path.join(
+                os.path.dirname(os.path.realpath(__file__)), 
+                "assets/crepe_model.onnx"
+            )
+        )
 
     def predict(self, audio, sr=16000, viterbi=True, center=True, step_size=10):
         """
