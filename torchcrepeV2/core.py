@@ -13,7 +13,7 @@ class TorchCrepePredictor:
     """
     def __init__(self, device="cuda"):
         self.model = TorchCrepe()
-        self.model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.realpath(__file__)), "model-full-crepe.pt")))
+        self.model.load_state_dict(torch.load(os.path.join(os.path.dirname(os.path.realpath(__file__)), "assets/model-full-crepe.pt")))
         self.model.eval()
 
         self.device = device
