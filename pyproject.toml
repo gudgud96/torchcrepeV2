@@ -1,3 +1,28 @@
 [build-system]
 requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "torchcrepeV2"
+version = "0.2.0"
+description = "Yet another crepe (pitch tracking tool) in PyTorch."
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "Hao Hao Tan", email = "helloharry66@gmail.com"}
+]
+requires-python = ">=3.7"
+dependencies = [
+    "torch",
+    "numpy",
+    "onnxruntime",
+    "onnx",
+    "librosa",
+    "hmmlearn"
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.package-data]
+torchcrepeV2 = ["**/*.onnx", "**/*.pt"]
